@@ -6,6 +6,8 @@ RUN pip install tensorflow zeep elasticsearch cx-Oracle geopy matplotlib pydot g
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/Berlin" JUPYTER_ENABLE_LAB=yes
 USER 0
 
+RUN pip install jupyterlab jupyterhub
+
 RUN cd /tmp/ && \
     curl -LO https://download.oracle.com/otn_software/linux/instantclient/19800/instantclient-basic-linux.x64-19.8.0.0.0dbru.zip && \
     unzip instantclient-basic-linux.x64-19.8.0.0.0dbru.zip && \
@@ -22,8 +24,8 @@ RUN cd /tmp/ && \
 
 ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_19_8/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 USER 0
-#WORKDIR /tf
-#ENV HOME=/tf
+WORKDIR /tf/nfs
+ENV HOME=/tf/nfs
 
 ### R verfuegbar machen ###
 RUN apt-get update && apt-get install -y libxml2-dev libxml2 libssl-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
