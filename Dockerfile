@@ -2,7 +2,7 @@ FROM tensorflow/tensorflow:latest-gpu-jupyter
 
 RUN /usr/bin/python3 -m pip install --upgrade pip
 RUN apt-get update && apt-get install -y r-base r-base-dev
-RUN pip install tensorflow zeep elasticsearch cx-Oracle geopy matplotlib pydot graphviz ipyparallel nltk pandas sklearn ipyleaflet dash dash-leaflet jupyterlab
+RUN pip install tensorflow zeep elasticsearch cx-Oracle geopy matplotlib pydot graphviz ipyparallel nltk pandas sklearn ipyleaflet dash dash-leaflet jupyterlab jupyterhub
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/Berlin" JUPYTER_ENABLE_LAB=yes
 USER 0
 
