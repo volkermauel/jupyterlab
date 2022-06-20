@@ -20,12 +20,13 @@ RUN cd /tmp/ && \
     ldconfig && \
     apt-get install -y python3-mpltoolkits.basemap && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* &&
 
 ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_19_8/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 USER 0
-WORKDIR /tf/nfs
-ENV HOME=/tf/nfs
+WORKDIR /tf
+ENV HOME=/tf
+RUN chmod 777 /tf
 
 ### R verfuegbar machen ###
 RUN apt-get update && apt-get install -y libxml2-dev libxml2 libssl-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
@@ -39,4 +40,5 @@ RUN apt-get install -y nodejs npm
 RUN npm install -g --unsafe-perm ijavascript
 RUN ijsinstall --install=global
 ###end javascript in jupyterlab###
+USER jovyan
 CMD jupyter-lab --allow-root --ip=0 --collaborative
